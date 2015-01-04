@@ -1,0 +1,30 @@
+{
+  "name": "dogM",
+  "version": "0.0.0",
+  "description": "base on node.js bms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iobee/dogm.git"
+  },
+  "keywords": [
+    "dogm",
+    "bug",
+    "bms"
+  ],
+  "author": "iobee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iobee/dogm/issues"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  },
+  "dependencies": {
+    "express": "^4.10.6",
+    "mongodb": "^1.4.26"
+  }
+}
