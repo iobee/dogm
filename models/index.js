@@ -7,3 +7,9 @@ mongoose.connect(config.db, function (err) {
         process.exit(1)
     }
 })
+
+require("./user")
+require("./role")
+
+exports.User = mongoose.model("User")
+exports.Role = mongoose.model("Role")
