@@ -8,7 +8,7 @@ var UserSchema = new Schema({
     password: {type: String},
     email: {type: String},
     roleId: {type: ObjectId},
-    dateCreated: {type: Date, default: Date.now()}, // create date
+    dateCreated: {type: Date, default: Date.now}, // create date
     lastVisited: {type: Date }, // last visit date
     avatarId: {type: ObjectId}
 

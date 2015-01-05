@@ -5,8 +5,8 @@ var ObjectId = Schema.ObjectId
 var ProjectSchema = new Schema({
     name: {type: String},
     status: {type: Number},
-    enabled: {type: Boolean},
-    cratedDate: {type: Date},
+    enabled: {type: Boolean, default: true},
+    cratedDate: {type: Date, default: Date.now},
     envId: {type: ObjectId}
 })
 

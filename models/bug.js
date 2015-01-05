@@ -10,7 +10,7 @@ var BugSchema = new Schema({
     reporterId: {type: Number},
     handlerId: {type: ObjectId},
     projectId: {type: ObjectId},
-    createdDate: {type: Date, default: Date.now()}
+    createdDate: {type: Date, default: Date.now}
 })
 
 mongoose.model("Bug", BugSchema)
