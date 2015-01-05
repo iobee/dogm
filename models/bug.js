@@ -1,5 +1,6 @@
 var mongoose = require("mongoose")
 var Schema = mongoose.Schema
+var ObjectId = Schema.ObjectId
 
 var BugSchema = new Schema({
     summary: {type: String},
@@ -7,9 +8,9 @@ var BugSchema = new Schema({
     severity: {type: Number},
     priority: {type: Number},
     reporterId: {type: Number},
-    handlerId: {type: String},
-    projectId: {type: String},
-    createdDate: {type: Date}
+    handlerId: {type: ObjectId},
+    projectId: {type: ObjectId},
+    createdDate: {type: Date, default: Date.now()}
 })
 
 mongoose.model("Bug", BugSchema)
