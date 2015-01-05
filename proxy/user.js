@@ -13,5 +13,5 @@ exports.getUserList = function(names, callback) {
         return callback(null, [])
     }
 
-    User.find({ loginname: { $in: name } }, callback)
+    User.find({ loginname: { $in: names } }, callback)
 }
