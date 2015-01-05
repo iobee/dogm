@@ -10,6 +10,12 @@ mongoose.connect(config.db, function (err) {
 
 require("./user")
 require("./role")
+require("./file.js")
+require("./bug.js")
+require("./project.js")
 
 exports.User = mongoose.model("User")
 exports.Role = mongoose.model("Role")
+exports.File = mongoose.model("File")
+exports.Bug = mongoose.model("Bug")
+exports.Project = mongoose.model("Project")
