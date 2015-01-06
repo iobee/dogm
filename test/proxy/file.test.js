@@ -7,6 +7,7 @@ describe("test/proxy/file.test.js", function() {
         it("should upload file", function(done) {
             FileProxy.uploadFile("test.js", "~/download/test.js", function(err, result) {
                 should.not.exist(err)
+                console.log(result._id)
                 should.exist(result)
                 done()
             })
