@@ -8,11 +8,11 @@ var File = models.File
  * @param {String} path file path
  */
 exports.uploadFile = function(name, path, callback) {
-    if (name) {
+    if (!name) {
         return callback(null, [])
     }
 
-    if (path) {
+    if (!path) {
         return callback(null, [])
     }
 

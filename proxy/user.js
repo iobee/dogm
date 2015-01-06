@@ -14,7 +14,7 @@ exports.getUserList = function(names, callback) {
     }
 
     User.find({
-        name: {
+        username: {
             $in: names
         }
     }, callback)
@@ -33,7 +33,7 @@ exports.saveUser = function(name, callback) {
     }
 
     var user = new User()
-    user.name = name
+    user.username = name
 
     user.save(callback)
 }

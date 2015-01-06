@@ -1,5 +1,5 @@
 var should = require("should")
-var proxy = require("../proxy")
+var proxy = require("../../proxy")
 var FileProxy = proxy.File
 
 describe("test/proxy/file.test.js", function() {
