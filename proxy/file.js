@@ -30,3 +30,15 @@ exports.newAndSave = function(name, path, callback) {
 exports.getFileById = function(id, callback){
     File.find({_id: id}, callback)
 }
+
+/**
+ * get file list
+ * Callback:
+ * - err, database error
+ * - files, file list
+ * @param {Function} callback callback
+ * @return {*}
+ */
+exports.getFileList = function (callback) {
+    File.find(callback)
+}

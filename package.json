@@ -26,11 +26,15 @@
     "gulp-jshint": "^1.9.0",
     "gulp-sass": "^1.2.4",
     "mocha": "^2.1.0",
-    "should": "^4.4.2"
+    "should": "^4.4.2",
+    "supertest": "^0.15.0"
   },
   "dependencies": {
+    "body-parser": "^1.10.1",
+    "connect-busboy": "0.0.2",
     "express": "^4.10.6",
     "mongodb": "^1.4.26",
-    "mongoose": "^3.8.21"
+    "mongoose": "^3.8.21",
+    "utility": "^1.2.1"
   }
 }
