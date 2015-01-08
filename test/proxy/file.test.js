@@ -3,14 +3,14 @@ var proxy = require("../../proxy")
 var FileProxy = proxy.File
 
 describe("test/proxy/file.test.js", function() {
-    describe("#newAndSave", function() {
-        it("should upload file", function(done) {
-            FileProxy.newAndSave("test.js", "~/download/test.js", function(err, result) {
-                should.not.exist(err)
-                console.log(result._id)
-                should.exist(result)
-                done()
-            })
+    var fileId
+
+    before(function(done){
+        FileProxy.newAndSave("test.test", "~/download/test", function(err, file){
+            should.not.exist(err)
+            file.should.have.property("path", "~/download/test")
+            fileId = file._id
+            done()
         })
     })
 
@@ -32,6 +32,14 @@ describe("test/proxy/file.test.js", function() {
                 should.exist(result)
                 done()
             })
+        })
+    })
+
+    after(function(done){
+        FileProxy.deleteFileById(fileId, function(err, count){
+            should.not.exist(err)
+            count.should.be.equal(1)
+            done()
         })
     })
 })

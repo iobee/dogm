@@ -42,3 +42,7 @@ exports.getFileById = function(id, callback){
 exports.getFileList = function (callback) {
     File.find(callback)
 }
+
+exports.deleteFileById = function(id, callback){
+    File.remove({_id: id}, callback)
+}
