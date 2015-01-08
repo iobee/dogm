@@ -3,22 +3,46 @@ var proxy = require("../../proxy")
 var UserProxy = proxy.User
 
 describe("test/proxy/user.test.js", function() {
-    describe("#saveUser", function() {
-        it("new user", function(done) {
-            UserProxy.saveUser("nick", function(err, result) {
+    var userId
+
+    // for test, before test new a user
+    before(function(done){
+       UserProxy.saveUser("nick", function(err, result){
+           should.not.exist(err)
+           result.should.have.property("username", "nick")
+           userId = result._id
+           done(err)
+       })
+    })
+
+    describe("#getUserList", function() {
+        it("should show all users", function(done) {
+            UserProxy.getUserList([], function(err, users) {
                 should.not.exist(err)
-                should.exist(result)
-                console.info(result)
+                users.length.should.be.above(1)
                 done()
             })
         })
     })
 
-    describe("#getUserList()", function() {
-        it("should show users", function(done) {
-            UserProxy.getUserList(["nick"], function(err, users) {
+    describe("getUserById", function(){
+        it("should get a user detail", function(done){
+            UserProxy.getUserById(userId, function(err, user){
                 should.not.exist(err)
-                users.length.should.be.above(1)
+                console.log("DEBUG return user is " + user.username)
+                user.should.have.property("username", "nick")
+                done()
+            })
+        })
+    })
+
+    describe("deleteUserById", function(){
+        it("should delete a user", function(done){
+            console.log("DEBUG: before delete he userId is" + userId)
+            UserProxy.deleteUserById(userId, function(err, user){
+                should.not.exist(err)
+                console.log(user)
+                should.exist(user)
                 done()
             })
         })

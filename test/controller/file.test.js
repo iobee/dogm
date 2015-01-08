@@ -14,10 +14,19 @@ describe("test/controller/file.test.js", function(){
 
     describe("#uploadFile", function(){
         it("should upload a file", function(done){
-            request.post("/api/v1/files").attach("test", "public/test.png").expect(200, function(err, res){
-                console.log(res.text)
-                done(err)
-            })
+            request.post("/api/v1/files")
+                .attach("test", "public/test.png")
+                .expect("Location", /^\/public\/upload\/[\w/]+\.png$/)
+                .expect(201)
+                .end(function (err, res) {
+                    if(err){
+                        done(err)
+                    }
+
+                    console.log(res.text)
+                    res.body.should.have.property("name", "test.png")
+                    done()
+                })
         })
     })
 })

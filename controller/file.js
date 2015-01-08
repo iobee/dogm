@@ -33,9 +33,12 @@ exports.upload = function(req, res, next){
                 next(err)
             }
 
-            res.json({
-                success: true,
-                url: result.url
+            FileProxy.newAndSave(filename, result.url, function(err, file){
+                if(err){
+                    next(err)
+                }
+
+                res.location(result.url).status(201).json(file)
             })
         })
     })
