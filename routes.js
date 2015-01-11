@@ -2,6 +2,7 @@ var express = require("express")
 var FileController = require("./controller/file")
 var UserController = require("./controller/user")
 var BugController = require("./controller/bug")
+var ProjectController = require("./controller/project")
 
 var router = express.Router()
 
@@ -21,6 +22,12 @@ router.patch("/bugs/:id", BugController.updateBug)
 router.delete("/bugs/:id", BugController.deleteBug)
 router.post("/users/:userId/bugs/:bugId", BugController.assignBugToUser)
 
+// project interface
+router.get("/projects", ProjectController.getProjectList)
+router.get("/projects/:id", ProjectController.getProjectInfo)
+router.post("/projects", ProjectController.createProject)
+router.delete("/projects/:id", ProjectController.deleteProject)
+router.patch("/projects/:id", ProjectController.updateProject)
 
 module.exports = router
 
