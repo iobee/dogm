@@ -7,7 +7,7 @@ describe("test/proxy/user.test.js", function() {
 
     // for test, before test new a user
     before(function(done){
-       UserProxy.saveUser("nick", function(err, result){
+       UserProxy.saveUser({username: "nick", realName: "test"}, function(err, result){
            should.not.exist(err)
            result.should.have.property("username", "nick")
            userId = result._id

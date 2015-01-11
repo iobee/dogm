@@ -43,13 +43,8 @@ exports.deleteUserById = function(id, callback){
  * @param {String} name 用户名
  * @param {Function} callback
  */
-exports.saveUser = function(name, callback) {
-    if (user) {
-        return callback(null, [])
-    }
-
-    var user = new User()
-    user.username = name
+exports.saveUser = function(user, callback) {
+    var user = new User(user)
 
     user.save(callback)
 }

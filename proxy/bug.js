@@ -24,7 +24,7 @@ exports.newAndSave = function(bug, callback){
  * @param {Function} callback 回调函数
  */
 exports.getBugByUser = function(userId, callback){
-    BugModel.find({userId: userId}, callback)
+    BugModel.find({handlerId: userId}, callback)
 }
 
 /**

@@ -1,7 +1,7 @@
 var UserProxy = require("../proxy").User
 
 exports.getUserInfo = function(req, res, next){
-    var userId = req.param.id
+    var userId = req.params.id
     UserProxy.getUserById(userId, function(err, user){
         if(err){
             return next(err)
@@ -19,7 +19,7 @@ exports.newAndSave = function(req, res, next){
             return next(err)
         }
 
-        res.status(201).location(user._id)
+        res.status(201).location("http://www.dogm.org/" + user._id)
         res.json(user)
     })
 }
