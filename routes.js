@@ -14,6 +14,8 @@ router.post("/files", FileController.upload)
 router.get("/users/:id", UserController.getUserInfo)
 router.post("/users", UserController.newAndSave)
 router.get("/user", UserController.getCurrentUser)
+router.get("/projects/:id/users", UserController.getUserByProject)
+router.post("/projects/:id/users/:id", UserController.assignUserToProject)
 
 // bug interface
 router.get("/users/:id/bugs", BugController.getUserBugs)
@@ -28,6 +30,7 @@ router.get("/projects/:id", ProjectController.getProjectInfo)
 router.post("/projects", ProjectController.createProject)
 router.delete("/projects/:id", ProjectController.deleteProject)
 router.patch("/projects/:id", ProjectController.updateProject)
+
 
 module.exports = router
 

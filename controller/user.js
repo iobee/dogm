@@ -27,3 +27,16 @@ exports.newAndSave = function(req, res, next){
 exports.getCurrentUser = function(req, res, next){
     res.json({username: "nick"})
 }
+
+exports.assignUserToProject = function(req, res, next){
+    var projectId = req.params.projectId
+    var userId = req.params.userId
+
+    UserProxy.updateUser(userId, {projectId: projectId}, function(err, numAffected){
+        if(err){
+            return next(err)
+        }
+
+        res.status(204).end()
+    })
+}

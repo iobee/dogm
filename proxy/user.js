@@ -48,3 +48,7 @@ exports.saveUser = function(user, callback) {
 
     user.save(callback)
 }
+
+exports.updateUser = function(userId, user, callback){
+    User.update({_id: userId}, {$set: user}, {multi: false}, callback)
+}
