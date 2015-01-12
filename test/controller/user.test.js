@@ -11,7 +11,8 @@ describe("test/controller/user.test.js", function(){
                 .send({
                     username: "nick",
                     realName: "wangdong",
-                    email: "iobee@sina.com"
+                    email: "iobee@test.com",
+                    password: "123"
                 })
                 .expect(201)
                 .expect("Location", /http/)
@@ -19,6 +20,21 @@ describe("test/controller/user.test.js", function(){
                     should.not.exist(err)
                     res.body.should.have.property("username", "nick")
                     userId = res.body._id
+                    done()
+                })
+        })
+
+        it("should email be unique", function(done){
+            request.post("/api/v1/users")
+                .send({
+                    username: "nick",
+                    realName: "wangdong",
+                    email: "iobee@test.com"
+                })
+                .expect(404)
+                .end(function(err, res){
+                    should.not.exist(err)
+                    res.body.should.have.property("message")
                     done()
                 })
         })
@@ -51,6 +67,14 @@ describe("test/controller/user.test.js", function(){
                     res.body.should.have.property("username", "nick")
                     done()
                 })
+        })
+    })
+
+    describe("delete /users/:id", function(){
+        it("should return status 204", function(done){
+            request.delete("/api/v1/users/" + userId)
+                .expect(204)
+                .end(done)
         })
     })
 })

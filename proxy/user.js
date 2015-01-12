@@ -25,6 +25,18 @@ exports.getUserById = function(id, callback){
 }
 
 /**
+ * find user by email
+ * Callback
+ * - err, database error
+ * - user, result
+ * @param email user's email
+ * @param callback
+ */
+exports.getUserByEmail = function(email, callback){
+    User.find({email: email}, callback)
+}
+
+/**
  * delete user
  * Callback
  * - err database error

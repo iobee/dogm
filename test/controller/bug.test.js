@@ -13,8 +13,9 @@ describe("test/controller/bug.test.js", function(){
                 request.post("/api/v1/users")
                     .send({
                         username: "nick",
-                        realname: "test user",
-                        email: "test@sina.com"
+                        realName: "test user",
+                        email: "test@sina.com",
+                        password: "123456"
                     })
                     .expect(201)
                     .end(function(err, res){
@@ -48,7 +49,7 @@ describe("test/controller/bug.test.js", function(){
 
     describe("get /users/:id/bugs", function(){
         it("result's length should be gt 0", function(done){
-            request.get("/api/v1/users/" + "54b132ec484e5bdb48a04b62" + "/bugs")
+            request.get("/api/v1/users/" + userId + "/bugs")
                 .expect(200)
                 .end(function(err, res){
                     should.not.exist(err)
@@ -108,5 +109,12 @@ describe("test/controller/bug.test.js", function(){
                     done(err)
                 })
         })
+    })
+
+    after(function(done){
+        // delete user for other test
+        request.delete("/api/v1/users/" + userId)
+            .expect(204)
+            .end(done)
     })
 })

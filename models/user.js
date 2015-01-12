@@ -5,8 +5,8 @@ var ObjectId = Schema.ObjectId
 var UserSchema = new Schema({
     username: {type: String},
     realName: {type: String},
-    password: {type: String},
-    email: {type: String},
+    password: {type: String, required: true},
+    email: {type: String, required: true},
     roleId: {type: ObjectId},
     dateCreated: {type: Date, default: Date.now}, // create date
     lastVisited: {type: Date }, // last visit date

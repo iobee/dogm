@@ -1,6 +1,6 @@
 var bcrypt = require("bcrypt")
 
-exports.bash = function(str, callback) {
+exports.bhash = function(str, callback) {
     bcrypt.hash(str, 10, callback)
 }
 
@@ -16,4 +16,3 @@ exports.bash = function(str, callback) {
 exports.bcompare = function(str, hash, callback) {
     bcrypt.compare(str, hash, callback)
 }
-*/

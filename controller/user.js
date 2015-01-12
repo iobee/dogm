@@ -28,6 +28,17 @@ exports.getCurrentUser = function(req, res, next){
     res.json({username: "nick"})
 }
 
+exports.deleteUserById = function(req, res, next){
+    var userId = req.params.id
+    UserProxy.deleteUserById(userId, function(err, numAffected){
+        if(err){
+            return next(err)
+        }
+
+        res.status(204).end()
+    })
+}
+
 exports.assignUserToProject = function(req, res, next){
     var projectId = req.params.projectId
     var userId = req.params.userId

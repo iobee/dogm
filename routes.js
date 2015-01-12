@@ -1,6 +1,7 @@
 var express = require("express")
 var FileController = require("./controller/file")
 var UserController = require("./controller/user")
+var SignController = require(("./controller/sign"))
 var BugController = require("./controller/bug")
 var ProjectController = require("./controller/project")
 
@@ -12,9 +13,10 @@ router.post("/files", FileController.upload)
 
 // user interface
 router.get("/users/:id", UserController.getUserInfo)
-router.post("/users", UserController.newAndSave)
+router.delete("/users/:id", UserController.deleteUserById)
+router.post("/users", SignController.signUp)
 router.get("/user", UserController.getCurrentUser)
-router.get("/projects/:id/users", UserController.getUserByProject)
+// router.get("/projects/:id/users", UserController.getUserByProject)
 router.post("/projects/:id/users/:id", UserController.assignUserToProject)
 
 // bug interface

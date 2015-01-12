@@ -12,8 +12,8 @@ var config = {
     hostname: "localhost",
 
     // session 配置
-    session_secret: "node_club_dev"
-    auth_cookie_name: "node_clue"
+    session_secret: "node_club_dev",
+    auth_cookie_name: "node_clue",
 
     // mongodb 配置
     db: 'mongodb://127.0.0.1/node_club_dev',

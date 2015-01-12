@@ -7,19 +7,34 @@ describe("test/proxy/user.test.js", function() {
 
     // for test, before test new a user
     before(function(done){
-       UserProxy.saveUser({username: "nick", realName: "test"}, function(err, result){
-           should.not.exist(err)
-           result.should.have.property("username", "nick")
-           userId = result._id
-           done(err)
-       })
+        UserProxy.saveUser({
+            username: "nick",
+            realName: "test",
+            email: "iobee@sina.com",
+            password: "123456"
+        }, function(err, result){
+            should.not.exist(err)
+            result.should.have.property("username", "nick")
+            userId = result._id
+            done(err)
+        })
     })
 
     describe("#getUserList", function() {
         it("should show all users", function(done) {
             UserProxy.getUserList([], function(err, users) {
                 should.not.exist(err)
-                users.length.should.be.above(1)
+                users.length.should.be.above(0)
+                done()
+            })
+        })
+    })
+
+    describe("#getUserByEmail", function(){
+        it("should return a user", function(done){
+            UserProxy.getUserByEmail("iobee@sina.com", function(err, users){
+                should.not.exist(err)
+                users.length.should.be.greaterThan(0)
                 done()
             })
         })
