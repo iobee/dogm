@@ -5,8 +5,8 @@ var path = require("path")
 
 var config = {
     // mongodb 配置
-    db: 'mongodb://127.0.0.1/node_club_dev',
-    db_name: 'node_club_dev'
+    db: 'mongodb://127.0.0.1/dogm',
+    db_name: 'dogm'
 }
 
 module.exports = config
