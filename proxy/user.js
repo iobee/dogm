@@ -9,15 +9,31 @@ var User = models.User
  * @param {Function} callback 回调函数
  */
 exports.getUserList = function(names, callback) {
-    if (names.length === 0) {
-        return callback(null, [])
-    }
+    User.find({}, callback)
+}
 
-    User.find({
-        name: {
-            $in: names
-        }
-    }, callback)
+/**
+ * find user over id
+ * Callback
+ * - err, database error
+ * - user, user object
+ * @param {String} id userId
+ * @param {Function} callback callback
+ */
+exports.getUserById = function(id, callback){
+    User.findOne({_id: id}, callback)
+}
+
+/**
+ * delete user
+ * Callback
+ * - err database error
+ * - user the user that deleted
+ * @param {String} id the id of user
+ * @param {Function} callback callback
+ */
+exports.deleteUserById = function(id, callback){
+    User.remove({_id: id}, callback)
 }
 
 /**
@@ -27,13 +43,8 @@ exports.getUserList = function(names, callback) {
  * @param {String} name 用户名
  * @param {Function} callback
  */
-exports.saveUser = function(name, callback) {
-    if (user) {
-        return callback(null, [])
-    }
-
-    var user = new User()
-    user.name = name
+exports.saveUser = function(user, callback) {
+    var user = new User(user)
 
     user.save(callback)
 }

@@ -7,7 +7,7 @@ var BugSchema = new Schema({
     desc: {type: String},
     severity: {type: Number},
     priority: {type: Number},
-    reporterId: {type: Number},
+    reporterId: {type: ObjectId},
     handlerId: {type: ObjectId},
     projectId: {type: ObjectId},
     createdDate: {type: Date, default: Date.now}
