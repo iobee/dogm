@@ -11,6 +11,10 @@ var config = {
     port: 3000,
     hostname: "localhost",
 
+    // session 配置
+    session_secret: "node_club_dev"
+    auth_cookie_name: "node_clue"
+
     // mongodb 配置
     db: 'mongodb://127.0.0.1/node_club_dev',
     db_name: 'node_club_dev',
