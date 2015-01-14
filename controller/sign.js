@@ -41,20 +41,25 @@ exports.signUp = function(req, res, next){
 
 }
 exports.login = function(req, res, next) {
-    var email = req.body.email
-    var pass = req.body.pass
+    var email = req.query.email
+    var pass = req.query.password
 
-    UserProxy.getUserByEmail(email, function(err, user) {
+    UserProxy.getUserByEmail(email, function(err, users) {
         if (err) {
             return next(err)
         }
 
+        var user = users[0]
         var passhash = user.password
-        tools.bcompare(pass, passhash, function(err, res) {
+        tools.bcompare(pass, passhash, function(err, result) {
             if (err) {
                 return next(err)
             }
             authMiddleWare.gen_session(user, res)
+            res.json({
+                email: "iobee@sina.com",
+                success: true
+            })
 
         })
 

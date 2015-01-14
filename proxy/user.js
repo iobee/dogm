@@ -28,7 +28,7 @@ exports.getUserById = function(id, callback){
  * find user by email
  * Callback
  * - err, database error
- * - user, result
+ * - users, result
  * @param email user's email
  * @param callback
  */

@@ -4,12 +4,16 @@ var UserController = require("./controller/user")
 var SignController = require(("./controller/sign"))
 var BugController = require("./controller/bug")
 var ProjectController = require("./controller/project")
+var SignController = require("./controller/sign")
 
 var router = express.Router()
 
 // file interface
 router.get("/files/:id", FileController.getFile)
 router.post("/files", FileController.upload)
+
+// login
+router.get("/login", SignController.login)
 
 // user interface
 router.get("/users/:id", UserController.getUserInfo)

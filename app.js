@@ -6,13 +6,13 @@ var busboy = require("connect-busboy")
 var router = require("./routes")
 var session = require("express-session")
 var MongoStore = require("connect-mongo")(session)
-
+var cookieParser = require("cookie-parser")
 
 var app = express()
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
-    extend: true
+    extend: false
 }))
 
 app.use(busboy({
@@ -20,6 +20,7 @@ app.use(busboy({
         fileSize: 10 * 1024 * 1024 // 10MB
     }
 }))
+app.use(cookieParser(config.session_secret))
 app.use(session({
     secret: config.session_secret,
     store: new MongoStore({
