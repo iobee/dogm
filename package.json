@@ -41,6 +41,7 @@
     "mongodb": "^1.4.26",
     "mongoose": "^3.8.21",
     "nodemailer": "^1.3.0",
+    "nodemailer-smtp-transport": "^0.1.13",
     "utility": "^1.2.1"
   }
 }

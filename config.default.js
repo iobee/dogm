@@ -5,7 +5,9 @@ var path = require("path")
 
 var config = {
     // development state
-    debug: true,
+    debug: false,
+
+    name: "dogM",
 
     // server config
     port: 3000,
@@ -23,6 +25,18 @@ var config = {
     upload: {
         path: path.join(__dirname, 'public/upload/'),
         url: '/public/upload/'
+    },
+
+    // mail config
+    mail_opts: {
+        host: "smtp.sina.com",
+        port: 25,
+        tls: {rejectUnauthorized: false},
+        debug: true,
+        auth: {
+            user: "iobee@sina.com",
+            pass: "iobee"
+        }
     }
 }
 

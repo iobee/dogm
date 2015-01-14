@@ -1,6 +1,7 @@
-var config = require("../config")
+var config = require("../config.default")
 var UserProxy = require("../proxy").User
 var tools = require("../common/tools")
+var mail = require("../common/mail")
 var authMiddleWare = require("../middlewares/auth")
 
 exports.signUp = function(req, res, next){
@@ -32,7 +33,7 @@ exports.signUp = function(req, res, next){
                 if(err){
                     return next(err)
                 }
-
+                mail.sendActiveMail(email, "xxx", "xxxx")
                 res.status(201).location("http://")
                 res.json(user)
             })

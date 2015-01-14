@@ -1,4 +1,4 @@
-var config = require("../config")
+var config = require("../config.default")
 
 exports.gen_session = function(user, res) {
     var auth_token = user._id;
