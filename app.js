@@ -7,6 +7,7 @@ var router = require("./routes")
 var session = require("express-session")
 var MongoStore = require("connect-mongo")(session)
 var cookieParser = require("cookie-parser")
+var errorhandler = require("errorhandler")
 
 var app = express()
 
@@ -33,6 +34,9 @@ app.use(session({
 // routes
 app.use("/api/v1", router)
 
+if(config.debug){
+    app.use(errorHandler())
+}
 app.listen(config.port, function() {
     console.log("dogM listening on port %d in %s mode", config.port, app.settings.env)
     console.log("God bless love....")

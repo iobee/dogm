@@ -13,6 +13,10 @@ var config = {
     port: 3000,
     hostname: "localhost",
 
+    // log level config
+    // 1: debug
+    logLevel: 1,
+
     // session 配置
     session_secret: "node_club_dev",
     auth_cookie_name: "node_clue",

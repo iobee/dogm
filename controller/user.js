@@ -25,7 +25,8 @@ exports.newAndSave = function(req, res, next){
 }
 
 exports.getCurrentUser = function(req, res, next){
-    res.json({username: "nick"})
+    var user = req.session.user
+    res.json(user)
 }
 
 exports.deleteUserById = function(req, res, next){

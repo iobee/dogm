@@ -56,12 +56,15 @@ exports.login = function(req, res, next) {
             if (err) {
                 return next(err)
             }
-            authMiddleWare.gen_session(user, res)
-            res.json({
-                email: "iobee@sina.com",
-                success: true
+            // authMiddleWare.gen_session(user, res)
+            req.session.regenerate(function(err){
+                req.session.user = user
+                req.session.success = "Authenticated success"
+                res.json({
+                    email: "iobee@sina.com",
+                    success: true
+                })
             })
-
         })
 
     })
