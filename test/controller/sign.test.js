@@ -13,6 +13,7 @@ describe("test/controller/sign.test.js", function(){
     before(function(done){
         request.post("/api/v1/users")
             .send({
+                username: "nick",
                 email: "iobee@sina.com",
                 password: "123456"
             })

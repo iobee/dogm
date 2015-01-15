@@ -1,6 +1,10 @@
 var should = require("should")
 var app = require("../../app")
-var request = require("supertest")(app)
+var supertest = require("supertest")
+var request = supertest(app)
+
+// for session test, agent can keep cookie
+var agent = supertest.agent(app)
 
 describe("test/controller/user.test.js", function(){
     var userId
@@ -14,8 +18,8 @@ describe("test/controller/user.test.js", function(){
                     email: "iobee@test.com",
                     password: "123"
                 })
+                .expect("Location", /users/)
                 .expect(201)
-                .expect("Location", /http/)
                 .end(function (err, res) {
                     should.not.exist(err)
                     res.body.should.have.property("username", "nick")
@@ -29,14 +33,26 @@ describe("test/controller/user.test.js", function(){
                 .send({
                     username: "nick",
                     realName: "wangdong",
-                    email: "iobee@test.com"
+                    email: "iobee@test.com",
+                    password: "123"
                 })
-                .expect(404)
+                .expect(400)
                 .end(function(err, res){
                     should.not.exist(err)
-                    res.body.should.have.property("message")
+                    res.body.should.have.property("errorCode", 10003)
                     done()
                 })
+        })
+
+        // login for next session test
+        it("should login success", function(done){
+            agent.get("/api/v1/login")
+                .query({
+                    email: "iobee@test.com",
+                    password: "123"
+                })
+                .expect(200)
+                .end(done)
         })
     })
 
@@ -57,14 +73,14 @@ describe("test/controller/user.test.js", function(){
 
     describe("get /user", function(){
         it("should return current user", function(done){
-            request.get("/api/v1/user")
+            agent.get("/api/v1/user")
                 .expect(200)
                 .end(function(err, res){
                     if(err){
                         done(err)
                     }
 
-                    res.body.should.have.property("username", "nick")
+                    res.body.should.have.property("email", "iobee@test.com")
                     done()
                 })
         })

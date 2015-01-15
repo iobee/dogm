@@ -42,7 +42,9 @@ describe("test/controller/bug.test.js", function(){
                     })
             }
         ], function(err, result){
-            should.not.exist(err)
+            if(err){
+                return done(err)
+            }
             done()
         })
     })

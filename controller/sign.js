@@ -3,25 +3,53 @@ var UserProxy = require("../proxy").User
 var tools = require("../common/tools")
 var mail = require("../common/mail")
 var authMiddleWare = require("../middlewares/auth")
+var validator = require("validator")
+var logger = require("../common/logger")
+var EventProxy = require("eventproxy")
+
 
 exports.signUp = function(req, res, next){
     var username = req.body.username
 	var email = req.body.email
 	var pass = req.body.password
 
-    UserProxy.getUserByEmail(email, function(err, users){
+    var ep = new EventProxy()
+    ep.fail(next)
+    ep.on("prop_err", function(msg){
+        res.status(400)
+        res.json(msg)
+    })
+
+    if(!username || !email || !pass){
+        ep.emit("prop_err", {
+            errorCode: 10001,
+            errorMsg: "invalid arguments!"
+        })
+        return
+    }
+
+    if(!validator.isEmail(email.trim())){
+        ep.emit("prop_err", {
+            errorCode: 10002,
+            errorMsg: "invalid email"
+        })
+        return
+    }
+
+    UserProxy.getUserByEmail(email.trim(), function(err, users){
         if(err){
             return next(err)
         }
 
         if(users.length > 0){
-            res.status(404).json({
-                message: "email has be used, please use a new email"
+            ep.emit("prop_err", {
+                errorCode: 10003,
+                errorMsg: "email has been used!"
             })
-
             return
         }
 
+        // hash password before save it
         tools.bhash(pass, function(err, passhash){
             var user = {
                 email: email,
@@ -34,20 +62,52 @@ exports.signUp = function(req, res, next){
                     return next(err)
                 }
                 mail.sendActiveMail(email, "xxx", "xxxx")
-                res.status(201).location("http://")
+                res.status(201).location(req.path + "/" + user._id)
                 res.json(user)
             })
         })
     })
 
 }
+
 exports.login = function(req, res, next) {
     var email = req.query.email
     var pass = req.query.password
 
+    var ep = new EventProxy()
+    ep.on("prop_err", function(msg){
+        res.status(400)
+        res.json(msg)
+    })
+
+    if(!email || !pass){
+        ep.emit("prop_err", {
+            errorCode: 20001,
+            errorMsg: "invalid arguments!"
+        })
+        return
+    }
+
+    if(!validator.isEmail(email)){
+        ep.emit("prop_err", {
+            errorCode: 20003,
+            errorMsg: "invalid email"
+        })
+
+        return
+    }
+
     UserProxy.getUserByEmail(email, function(err, users) {
         if (err) {
             return next(err)
+        }
+
+        if(users.length === 0){
+            res.status(404)
+            res.json({
+                errorCode: 20002,
+                errorMsg: "username or password error"
+            })
         }
 
         var user = users[0]
@@ -56,14 +116,21 @@ exports.login = function(req, res, next) {
             if (err) {
                 return next(err)
             }
+
+            // pass not equal passhash
+            if(!result){
+                res.status(404)
+                res.json({
+                    errorCode: 20002,
+                    errorMsg: "username or password error"
+                })
+            }
+
             // authMiddleWare.gen_session(user, res)
             req.session.regenerate(function(err){
                 req.session.user = user
                 req.session.success = "Authenticated success"
-                res.json({
-                    email: "iobee@sina.com",
-                    success: true
-                })
+                res.json(user)
             })
         })
 
