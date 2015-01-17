@@ -62,6 +62,8 @@ exports.signUp = function(req, res, next){
                     return next(err)
                 }
                 mail.sendActiveMail(email, "xxx", "xxxx")
+                logger.info("%s register success", email)
+
                 res.status(201).location(req.path + "/" + user._id)
                 res.json(user)
             })
@@ -76,6 +78,7 @@ exports.login = function(req, res, next) {
 
     var ep = new EventProxy()
     ep.on("prop_err", function(msg){
+        logger.info("login fail %j", msg)
         res.status(400)
         res.json(msg)
     })
@@ -103,6 +106,7 @@ exports.login = function(req, res, next) {
         }
 
         if(users.length === 0){
+            logger.info("%s login fail", email)
             res.status(404)
             res.json({
                 errorCode: 20002,
@@ -130,6 +134,8 @@ exports.login = function(req, res, next) {
             req.session.regenerate(function(err){
                 req.session.user = user
                 req.session.success = "Authenticated success"
+
+                logger("%s authenticated success", email)
                 res.json(user)
             })
         })

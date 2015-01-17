@@ -9,7 +9,7 @@ var User = models.User
  * @param {Function} callback 回调函数
  */
 exports.getUserList = function(names, callback) {
-    User.find({}, callback)
+    User.find({}, {password: 0}, callback)
 }
 
 /**

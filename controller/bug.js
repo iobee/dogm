@@ -1,21 +1,46 @@
 var BugProxy = require("../proxy").Bug
+var logger = require("../common/logger")
 
 exports.assignBugToUser = function(req, res, next){
     var userId = req.params.userId
     var bugId = req.params.bugId
 
-    BugProxy.assignBugToUser(userId, bugId, function(err, result){
+    if(userId || bugId){
+        res.status(400)
+        res.json({
+            errorCode: 40001,
+            errorMsg: "invalid arguments"
+        })
+
+        return
+    }
+
+    BugProxy.assignBugToUser(userId, bugId, function(err, numAffected){
         if(err){
             return next(err)
         }
 
-        console.log("DEBUG assign bug:" + result)
+        if(numAffected === 0){
+            res.status(404).end()
+            return
+        }
+
         res.status(204).end()
     })
 }
 
 exports.deleteBug = function(req, res, next){
     var bugId = req.params.id
+
+    if(bugId){
+        res.status(400)
+        res.json({
+            errorCode: 40001,
+            errorMsg: "invalid arguments"
+        })
+
+        return
+    }
 
     BugProxy.deleteBugById(bugId, function(err, numAffected){
         if(err){

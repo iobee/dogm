@@ -1,4 +1,5 @@
 var UserProxy = require("../proxy").User
+var logger = require("../common/logger")
 
 exports.getUserInfo = function(req, res, next){
     var userId = req.params.id
@@ -7,10 +8,22 @@ exports.getUserInfo = function(req, res, next){
             return next(err)
         }
 
+        if(!user){
+            logger.info("not found the user by %s", userId)
+            res.status(404).end()
+            return
+        }
+
         res.json(user)
     })
 }
 
+/**
+ * Deprecated
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.newAndSave = function(req, res, next){
     var user = req.body
 
@@ -35,7 +48,12 @@ exports.deleteUserById = function(req, res, next){
         if(err){
             return next(err)
         }
+        if(numAffected === 0){
+            res.status(404).end()
+            return
+        }
 
+        logger.info("%s delete user:%s success", req.session.user.email, userId)
         res.status(204).end()
     })
 }
@@ -44,11 +62,25 @@ exports.assignUserToProject = function(req, res, next){
     var projectId = req.params.projectId
     var userId = req.params.userId
 
+    if(projectId || userId){
+        res.status(400)
+        res.json({
+            errorCode: 30001,
+            errorMsg: "invalid arguments"
+        })
+    }
+
     UserProxy.updateUser(userId, {projectId: projectId}, function(err, numAffected){
         if(err){
             return next(err)
         }
 
+        if(numAffected === 0){
+            res.status(404).end()
+            return
+        }
+
+        logger.info("%s assign user:%s to project:%s success", req.session.user.email, userId, projectId)
         res.status(204).end()
     })
 }
