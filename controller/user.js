@@ -1,3 +1,4 @@
+"use strict"
 var UserProxy = require("../proxy").User
 var logger = require("../common/logger")
 

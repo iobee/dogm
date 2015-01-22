@@ -1,3 +1,4 @@
+"use strict"
 var BugProxy = require("../proxy").Bug
 var logger = require("../common/logger")
 

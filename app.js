@@ -7,7 +7,7 @@ var router = require("./routes")
 var session = require("express-session")
 var MongoStore = require("connect-mongo")(session)
 var cookieParser = require("cookie-parser")
-var errorhandler = require("errorhandler")
+var errorHandler = require("errorhandler")
 
 var app = express()
 
@@ -21,6 +21,7 @@ app.use(busboy({
         fileSize: 10 * 1024 * 1024 // 10MB
     }
 }))
+
 app.use(cookieParser(config.session_secret))
 app.use(session({
     secret: config.session_secret,
