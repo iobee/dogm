@@ -112,6 +112,8 @@ exports.login = function(req, res, next) {
                 errorCode: 20002,
                 errorMsg: "username or password error"
             })
+
+            return
         }
 
         var user = users[0]

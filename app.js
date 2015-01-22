@@ -11,6 +11,9 @@ var errorHandler = require("errorhandler")
 
 var app = express()
 
+app.use("/bower_components", express.static("./bower_components"))
+app.use(express.static("./app"))
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extend: false
