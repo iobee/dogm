@@ -11,8 +11,9 @@ var errorHandler = require("errorhandler")
 
 var app = express()
 
-app.use("/bower_components", express.static("./bower_components"))
-app.use(express.static("./app"))
+app.use("/static/bower_components", express.static("./bower_components"))
+app.use("/static", express.static("./app"))
+app.use("/static", express.static("./.tmp"))
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({

@@ -11,7 +11,7 @@ var config = {
 
     // server config
     port: 3000,
-    hostname: "localhost",
+    hostname: "0.0.0.0",
 
     // log level config
     // 1: debug
