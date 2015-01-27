@@ -35,6 +35,10 @@ angular
                 templateUrl: 'views/register.html',
                 controller: 'RegisterCtrl'
             })
+            .when('/createIssue', {
+                templateUrl: 'views/issue/create.html',
+                controller: 'IssueCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
