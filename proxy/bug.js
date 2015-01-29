@@ -1,3 +1,5 @@
+"use strict"
+
 var models = require("../models")
 var BugModel = models.Bug
 
@@ -10,9 +12,9 @@ var BugModel = models.Bug
  * @param {Function} callback callback
  */
 exports.newAndSave = function(bug, callback){
-    var bug = new BugModel(bug)
+    var bugModel = new BugModel(bug)
 
-    bug.save(callback)
+    bugModel.save(callback)
 }
 
 /**
@@ -24,7 +26,10 @@ exports.newAndSave = function(bug, callback){
  * @param {Function} callback 回调函数
  */
 exports.getBugByUser = function(userId, callback){
-    BugModel.find({handlerId: userId}, callback)
+    BugModel.find({_handler: userId})
+        .populate("_handler _reporter _project")
+        .exec(callback)
+
 }
 
 /**
@@ -36,7 +41,9 @@ exports.getBugByUser = function(userId, callback){
  * @param {Function} callback 回调函数
  */
 exports.getBugByProject = function(projectId, callback){
-    BugModel.find({projectId: projectId}, callback)
+    BugModel.find({_project: projectId})
+        .populate("_handler _reporter _project")
+        .exec(callback)
 }
 
 /**

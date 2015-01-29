@@ -39,6 +39,10 @@ angular
                 templateUrl: 'views/issue/create.html',
                 controller: 'IssueCtrl'
             })
+            .when('/createRole', {
+                templateUrl: 'views/role/create.html',
+                controller: 'RoleCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

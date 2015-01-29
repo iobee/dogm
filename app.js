@@ -8,8 +8,10 @@ var session = require("express-session")
 var MongoStore = require("connect-mongo")(session)
 var cookieParser = require("cookie-parser")
 var errorHandler = require("errorhandler")
+var morgan = require("morgan")
 
 var app = express()
+app.use(morgan("combined"))
 
 app.use("/static/bower_components", express.static("./bower_components"))
 app.use("/static", express.static("./app"))

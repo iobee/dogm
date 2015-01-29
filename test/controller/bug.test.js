@@ -30,8 +30,8 @@ describe("test/controller/bug.test.js", function(){
                     .send({
                         summary: "it's bug",
                         desc: "test",
-                        handlerId: arg1,
-                        reporterId: arg1
+                        _handler: arg1,
+                        _reporter: arg1
                     })
                     .expect(201)
                     .end(function(err, res){
@@ -66,7 +66,7 @@ describe("test/controller/bug.test.js", function(){
         it("should create success", function(done){
             request.post("/api/v1/bugs")
                 .send({
-                    handlerId: userId,
+                    _handler: userId,
                     summary: "this is a test bug",
                     desc: "test, test, test"
                 })
@@ -74,7 +74,7 @@ describe("test/controller/bug.test.js", function(){
                 .expect(201)
                 .end(function(err, res){
                     should.not.exist(err)
-                    res.body.should.have.property("handlerId", userId)
+                    res.body.should.have.property("_handler", userId)
                     done()
                 })
         })
