@@ -45,6 +45,7 @@ exports.getCurrentUser = function(req, res, next){
 
 exports.deleteUserById = function(req, res, next){
     var userId = req.params.id
+
     UserProxy.deleteUserById(userId, function(err, numAffected){
         if(err){
             return next(err)
@@ -54,7 +55,7 @@ exports.deleteUserById = function(req, res, next){
             return
         }
 
-        logger.info("%s delete user:%s success", req.session.user.email, userId)
+        //logger.info("%s delete user:%s success", req.session.user.email, userId)
         res.status(204).end()
     })
 }

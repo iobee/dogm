@@ -1,3 +1,4 @@
+"use strict"
 var config = require("../config.default")
 
 /**
@@ -5,9 +6,9 @@ var config = require("../config.default")
  * @param {Object} user User who signUp
  * @param res
  */
-exports.gen_session = function(user, res) {
-    var auth_token = user._id;
-    res.cookie(config.auth_cookie_name, auth_token, {
+exports.genSession = function(user, res) {
+    var authToken = user._id;
+    res.cookie(config.auth_cookie_name, authToken, {
         path: '/',
         maxAge: 100 * 60 * 60 * 24 * 30, // 有效期30天 
         signed: true,
@@ -16,14 +17,20 @@ exports.gen_session = function(user, res) {
     })
 }
 
+/**
+ * 需要管理员权限
+ * @param req
+ * @param res
+ * @param next
+ */
 exports.adminRequired = function(req, res, next){
     if(!req.session.user){
-        res.status(404).end()
+        res.status(401).end()
     }
 
-    if(!req.session.user.isAdmin){
-        res.status(404).end()
-    }
+    //if(!req.session.user.isAdmin){
+    //    res.status(404).end()
+    //}
 
     next()
 }

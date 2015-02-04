@@ -10,7 +10,10 @@ var UserSchema = new Schema({
     roleId: {type: ObjectId},
     dateCreated: {type: Date, default: Date.now}, // create date
     lastVisited: {type: Date }, // last visit date
-    avatarId: {type: ObjectId}
+    avatar: {
+        url: {type: String},
+        type: {type: String}
+    }
 
 })
 

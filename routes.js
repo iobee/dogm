@@ -5,6 +5,7 @@ var SignController = require(("./controller/sign"))
 var BugController = require("./controller/bug")
 var ProjectController = require("./controller/project")
 var SignController = require("./controller/sign")
+var Auth = require("./middlewares/auth")
 
 var router = express.Router()
 
@@ -29,6 +30,7 @@ router.post("/bugs", BugController.createBug)
 router.patch("/bugs/:id", BugController.updateBug)
 router.delete("/bugs/:id", BugController.deleteBug)
 router.post("/users/:userId/bugs/:bugId", BugController.assignBugToUser)
+router.get("/user/bugs", Auth.adminRequired, BugController.getCurrentUserBugs)
 
 // project interface
 router.get("/projects", ProjectController.getProjectList)

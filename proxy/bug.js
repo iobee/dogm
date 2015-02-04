@@ -56,7 +56,7 @@ exports.getBugByProject = function(projectId, callback){
  * @param {Function} callback 回调函数
  */
 exports.assignBugToUser = function(userId, bugId, callback){
-    BugModel.update({_id: bugId}, {$set: {userId: userId}}, {multi: false}, callback)
+    BugModel.update({_id: bugId}, {$set: {_handler: userId}}, {multi: false}, callback)
 }
 
 exports.updateBug = function(bugId, bug, callback){

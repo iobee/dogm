@@ -1,3 +1,4 @@
+"use strict"
 var config = require("../config.default")
 var UserProxy = require("../proxy").User
 var tools = require("../common/tools")
@@ -137,7 +138,7 @@ exports.login = function(req, res, next) {
                 req.session.user = user
                 req.session.success = "Authenticated success"
 
-                logger("%s authenticated success", email)
+                logger.info("%s authenticated success", email)
                 res.json(user)
             })
         })

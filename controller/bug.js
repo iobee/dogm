@@ -6,7 +6,7 @@ exports.assignBugToUser = function(req, res, next){
     var userId = req.params.userId
     var bugId = req.params.bugId
 
-    if(userId || bugId){
+    if(!userId || !bugId){
         res.status(400)
         res.json({
             errorCode: 40001,
@@ -33,7 +33,7 @@ exports.assignBugToUser = function(req, res, next){
 exports.deleteBug = function(req, res, next){
     var bugId = req.params.id
 
-    if(bugId){
+    if(!bugId){
         res.status(400)
         res.json({
             errorCode: 40001,
@@ -88,6 +88,19 @@ exports.updateBug = function(req, res, next){
 
 exports.getUserBugs = function(req, res, next){
     var userId = req.params.id
+
+    BugProxy.getBugByUser(userId, function(err, bugs){
+        if(err){
+            return next(err)
+        }
+
+        res.json(bugs)
+    })
+}
+
+exports.getCurrentUserBugs = function(req, res, next){
+    // get current user's id
+    var userId = req.session.user._id
 
     BugProxy.getBugByUser(userId, function(err, bugs){
         if(err){

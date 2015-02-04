@@ -36,8 +36,6 @@ describe("test/controller/bug.test.js", function(){
                     .expect(201)
                     .end(function(err, res){
                         bugId = res.body._id
-                        console.log(1)
-                        console.log("DEBUG: bugId = " + bugId)
                         callback(err, res.body)
                     })
             }
@@ -57,6 +55,7 @@ describe("test/controller/bug.test.js", function(){
                     should.not.exist(err)
                     console.log("DEBUG uses's bugs length =" + res.body.length)
                     res.body.length.should.be.greaterThan(0)
+                    res.body[0]._handler.should.have.property("username", "nick")
                     done()
                 })
         })

@@ -54,6 +54,19 @@ describe("test/controller/user.test.js", function(){
                 .expect(200)
                 .end(done)
         })
+
+        it("should get use bugs success", function(done){
+            agent.get("/api/v1/user/bugs")
+                .expect(200)
+                .end(function(err, res){
+                    if(err){
+                        done(err)
+                    }
+
+                    res.body.length.should.be.greaterThan(0)
+                    done()
+                })
+        })
     })
 
     describe("get /users/:id", function(){
