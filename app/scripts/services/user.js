@@ -8,8 +8,6 @@
  * Service in the publicApp.
  */
 angular.module('publicApp')
-    .service('user', function ($resource) {
-        return $resource('/api/v1/users', {}, {
-
-        })
-    })
+    .factory('User', function ($resource) {
+        return $resource('/api/v1/users', {})
+    });

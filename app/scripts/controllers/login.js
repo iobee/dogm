@@ -15,7 +15,7 @@ angular.module('publicApp')
             'Karma'
         ]
 
-        $scope.submit = function (){
+        $scope.submit = function () {
             login.get({email: $scope.email, password: $scope.password}).$promise
                 .then(function(user){
                     $scope.email = user;

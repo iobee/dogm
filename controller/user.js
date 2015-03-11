@@ -4,7 +4,9 @@ var logger = require("../common/logger")
 
 exports.getUserInfo = function(req, res, next){
     var userId = req.params.id
+
     UserProxy.getUserById(userId, function(err, user){
+
         if(err){
             return next(err)
         }
@@ -84,5 +86,15 @@ exports.assignUserToProject = function(req, res, next){
 
         logger.info("%s assign user:%s to project:%s success", req.session.user.email, userId, projectId)
         res.status(204).end()
+    })
+}
+
+exports.getUserList = function(req, res, next) {
+    UserProxy.getUserList([], function(err, users) {
+        if (err) {
+            return next(err)
+        }
+
+        res.json(users).end()
     })
 }

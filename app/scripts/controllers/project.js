@@ -2,22 +2,23 @@
 
 /**
  * @ngdoc function
- * @name publicApp.controller:IssueCtrl
+ * @name publicApp.controller:ProjectCtrl
  * @description
- * # IssueCtrl
+ * # ProjectCtrl
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('IssueCtrl', function($scope, User) {
+    .controller('ProjectCtrl', function ($scope, Project) {
         $scope.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
             'Karma'
         ];
 
-        $scope.users = User.query();
-
         $scope.submit = function() {
-            $scope.result = $scope.bug;
+            var project = new Project();
+            project.name = $scope.project.name;
+            project.desc = $scope.project.desc;
+            project.$save();
         }
     });

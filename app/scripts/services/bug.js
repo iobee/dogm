@@ -8,7 +8,7 @@
  * Factory in the publicApp.
  */
 angular.module('publicApp')
-  .factory('Bug', function ($http, $q) {
+    .factory('Bug', function ($http, $q) {
         return {
             /**
              * 得到当前用户分配的bugs
@@ -31,11 +31,12 @@ angular.module('publicApp')
 
                 return deferred.promise;
             },
+
             /**
              * 根据用户ID，查找bugs
              * @param userId
              */
-            getBugsById: function(userId, callback){
+            getBugsByUserId: function(userId, callback){
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();
 
@@ -47,13 +48,27 @@ angular.module('publicApp')
                     .error(function(err){
                         deferred.reject(err);
                         return cb(err);
-                    })
+                    });
 
                 return deferred.promise;
 
             },
-            createBug: function(bug){
 
+            createBug: function(bug, callback){
+                var cb = callback || angular.noop;
+                var deferred = $q.defer();
+
+                $http.post('/api/v1/bugs', bug)
+                    .success(function(data) {
+                        deferred.resolve(data);
+                        return cb();
+                    })
+                    .error(function(err) {
+                        deferred.reject(err);
+                        return cb(err);
+                    });
+
+                return deferred.promise;
             }
         }
-  });
+    });
