@@ -16,9 +16,7 @@ angular.module('publicApp')
         ];
 
         $scope.submit = function() {
-            var project = new Project();
-            project.name = $scope.project.name;
-            project.desc = $scope.project.desc;
+            var project = new Project($scope.project);
             project.$save();
         }
     });

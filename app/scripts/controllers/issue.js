@@ -8,7 +8,7 @@
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('IssueCtrl', function($scope, User) {
+    .controller('IssueCtrl', function($scope, User, Project) {
         $scope.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -16,6 +16,7 @@ angular.module('publicApp')
         ];
 
         $scope.users = User.query();
+        $scope.projects = Project.query();
 
         $scope.submit = function() {
             $scope.result = $scope.bug;

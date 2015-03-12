@@ -43,6 +43,7 @@
                         <select id="inputProject" class="form-control" ng-model="bug.projectId">
                             <option>KernelSec</option>
                             <option>Test</option>
+                            <option ng-repeat="project in projects" value="{{project._id}}">{{project.name}}</option>
                         </select>
                     </div>
                 </div>

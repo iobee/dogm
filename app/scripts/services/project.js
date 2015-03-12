@@ -9,5 +9,5 @@
  */
 angular.module('publicApp')
   .factory('Project', function ($resource) {
-        return $resource('/api/v1/project', {})
+        return $resource('/api/v1/projects', {})
   });
