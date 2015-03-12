@@ -1,9 +1,10 @@
 "use strict"
+
 var ProjectModel = require("../models").Project
 
 exports.createProject = function(project, callback){
-    var project = new ProjectModel(project)
-    project.save(callback)
+    var mProject = new ProjectModel(project)
+    mProject.save(callback)
 }
 
 /**

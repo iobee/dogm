@@ -9,5 +9,5 @@
  */
 angular.module('publicApp')
   .factory('Role', function ($resource) {
-        return $resource('/api/v1/roles', {});
+        return $resource('/api/v1/roles/:id', {});
   });

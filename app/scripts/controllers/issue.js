@@ -8,7 +8,7 @@
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('IssueCtrl', function($scope, User, Project) {
+    .controller('IssueCtrl', function($scope, User, Project, Bug) {
         $scope.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',

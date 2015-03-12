@@ -3,7 +3,8 @@ var Schema = mongoose.Schema
 
 var RoleSchema = new Schema({
     name: {type: String},
-    status: {type: Number},
+    desc: {type: String},
+    status: {type: Number}, // 0:normal 1:disable
     createdDate: {type: Date, default: Date.now}
 })
 

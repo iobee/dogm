@@ -1,5 +1,6 @@
+"use strict"
 var models = require("../models")
-var File = models.File
+var DogmFile = models.File
 
 /**
  * upload file
@@ -10,12 +11,12 @@ var File = models.File
  * @param {String} path file path
  * @param {Function} callback callback
  */
-exports.newAndSave = function(name, path, callback) {
-    var file = new File()
-    file.name = name
-    file.path = path
+exports.newAndSave = function(fileName, path, callback) {
+    var mFile = new DogmFile()
+    mFile.name = fileName
+    mFile.path = path
 
-    file.save(callback)
+    mFile.save(callback)
 }
 
 /**
@@ -28,7 +29,7 @@ exports.newAndSave = function(name, path, callback) {
  * @returns {*}
  */
 exports.getFileById = function(id, callback){
-    File.find({_id: id}, callback)
+    DogmFile.find({_id: id}, callback)
 }
 
 /**
@@ -40,9 +41,9 @@ exports.getFileById = function(id, callback){
  * @return {*}
  */
 exports.getFileList = function (callback) {
-    File.find(callback)
+    DogmFile.find(callback)
 }
 
 exports.deleteFileById = function(id, callback){
-    File.remove({_id: id}, callback)
+    DogmFile.remove({_id: id}, callback)
 }
