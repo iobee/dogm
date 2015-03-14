@@ -1,3 +1,34 @@
+<h2 class="sub-header">Project</h2>
+<div class="table-responsive">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th></th>
+                <th>name</th>
+                <th>status</th>
+                <th>desc</th>
+                <th>create date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+                <td>KernelSec</td>
+                <td>development</td>
+                <td>2013-2-33 xx</td>
+			</tr>
+            <tr ng-repeat="project in projects">
+                <td>{{$index + 1}}</td>
+                <td>{{project.name}}</td>
+                <td>{{project.status}}</td>
+                <td>{{project.desc}}</td>
+                <td>{{project.createdDate}}</td>
+            </tr>
+		</tbody>
+	</table>
+</div>
+
+<h2 class="sub-header">Create Project</h2>
 <div class="row">
     <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
         <form ng-submit="submit()">

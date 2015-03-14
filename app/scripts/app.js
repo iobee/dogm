@@ -31,6 +31,11 @@ angular
                 templateUrl: 'views/login.html',
                 controller: 'LoginCtrl'
             })
+            .when('/logout', {
+                resolve: {
+                    logout: 'Logout'
+                }
+            })
             .when('/register', {
                 templateUrl: 'views/register.html',
                 controller: 'RegisterCtrl'

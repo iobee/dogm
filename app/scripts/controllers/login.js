@@ -8,7 +8,7 @@
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('LoginCtrl', function ($scope, login) {
+    .controller('LoginCtrl', function ($scope, $location, login) {
         $scope.awesomeThings = [
             'HTML5 Boilerplate',
             'AngularJS',
@@ -19,6 +19,7 @@ angular.module('publicApp')
             login.get({email: $scope.email, password: $scope.password}).$promise
                 .then(function(user){
                     $scope.email = user;
+                    $location.path('/');
                 })
                 .catch(function(err){
                     $scope.email = 'error'

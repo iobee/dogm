@@ -15,8 +15,11 @@ angular.module('publicApp')
             'Karma'
         ];
 
+        $scope.projects = Project.query();
+
         $scope.submit = function() {
-            var project = new Project($scope.project);
-            project.$save();
+            $scope.projects.push($scope.project);
+            //var project = new Project($scope.project);
+            //project.$save();
         }
     });
