@@ -40,6 +40,10 @@ angular
                 templateUrl: 'views/register.html',
                 controller: 'RegisterCtrl'
             })
+            .when('/user', {
+                templateUrl: 'views/user/user.html',
+                controller: 'UserCtrl'
+            })
             .when('/createIssue', {
                 templateUrl: 'views/issue/create.html',
                 controller: 'IssueCtrl'

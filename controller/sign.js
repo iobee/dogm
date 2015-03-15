@@ -74,7 +74,30 @@ exports.signUp = function(req, res, next){
             })
         })
     })
+}
 
+exports.inviteUser = function(req, res, next) {
+    var email = req.body.email
+    var ep = new EventProxy()
+
+    ep.on("prop_err", function(msg) {
+        logger.info("invite fail %j", msg);
+        res.status(400)
+        res.end()
+    })
+
+    if (!email) {
+        ep.emit("prop_err", {
+            errorCode: 20001,
+            errorMsg: "invalid arguments!"
+        })
+
+        return
+    }
+
+    mail.sendActiveMail(email, utility.md5(email + config.session_secret), "Nick")
+    logger.info("invite %s success", email)
+    res.json("success")
 }
 
 exports.login = function(req, res, next) {
@@ -83,7 +106,7 @@ exports.login = function(req, res, next) {
 
     var ep = new EventProxy()
     ep.on("prop_err", function(msg){
-        logger.info("login fail %j", msg)
+        logger.crit("login fail %j", msg)
         res.status(400)
         res.json(msg)
     })

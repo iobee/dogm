@@ -7,6 +7,7 @@ var UserSchema = new Schema({
     realName: {type: String},
     password: {type: String, required: true},
     email: {type: String, required: true},
+    complete: {type: Boolean, default: false}, // info has complete
     roleId: {type: ObjectId},
     dateCreated: {type: Date, default: Date.now}, // create date
     lastVisited: {type: Date }, // last visit date
