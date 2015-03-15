@@ -9,17 +9,32 @@
  */
 angular.module('publicApp')
     .controller('ProjectCtrl', function ($scope, Project) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
-
         $scope.projects = Project.query();
 
+        $scope.deleteProject = function(project) {
+
+            $scope.projects.splice($scope.projects.indexOf(project), 1);
+            Project.delete({id: project._id}).$promise
+                .then(function() {
+                    console.log('delete success');
+                })
+                .catch(function() {
+
+                });
+        };
+
         $scope.submit = function() {
+            var project = new Project($scope.project);
+
             $scope.projects.push($scope.project);
-            //var project = new Project($scope.project);
-            //project.$save();
+            project.$save()
+                .then(function() {
+                    console.log('save success');
+                })
+                .catch(function() {
+                    $scope.projects.pop();
+                });
+
+            $scope.project = null;
         }
     });

@@ -29,9 +29,8 @@
                 <div class="row">
                     <div class="col-xs-3">
                         <!--<button type="button" class="form-control" data-toggle="modal" data-target="#myModal" class="btn btn-default">{{handlerName | json}}</button>-->
-                        <select name="bug.handlerId" ng-model="bug.handlerId" id="inputID" class="form-control" required>
+                        <select name="bug.handlerId" ng-model="bug.handlerId" ng-options="user._id as user.username for user in users" id="inputID" class="form-control" required>
                         	<option value=""> -- Select One -- </option>
-                            <option ng-repeat="user in users" value="{{user._id}}">{{user.username}}</option>
                         </select>
                     </div>
                 </div>
@@ -40,9 +39,8 @@
                 <label for="inputProject">Select project</label>
                 <div class="row">
                     <div class="col-xs-3">
-                        <select id="inputProject" name="bug.projectId" class="form-control" ng-model="bug.projectId" required>
-                            <option value="">Add project</option>
-                            <option ng-repeat="project in projects" value="{{project._id}}">{{project.name}}</option>
+                        <select id="inputProject" name="bug.projectId" class="form-control" ng-model="bug.projectId" ng-options="project._id as project.name for project in projects" required>
+                            <option value="">-- Select One --</option>
                         </select>
                     </div>
                 </div>

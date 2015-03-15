@@ -7,7 +7,7 @@ var ProjectSchema = new Schema({
     desc: {type: String},
     status: {type: Number}, // 0: development 1:release 2:stable 3:obsolete
     enabled: {type: Boolean, default: true},
-    cratedDate: {type: Date, default: Date.now},
+    createdDate: {type: Date, default: Date.now},
     envId: {type: ObjectId}
 })
 

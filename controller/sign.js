@@ -4,9 +4,13 @@ var UserProxy = require("../proxy").User
 var tools = require("../common/tools")
 var mail = require("../common/mail")
 var authMiddleWare = require("../middlewares/auth")
-var validator = require("validator")
 var logger = require("../common/logger")
+
 var EventProxy = require("eventproxy")
+var validator = require("validator")
+var utility = require("utility")
+
+var SITE_ROOT_URL = config.hostname;
 
 
 exports.signUp = function(req, res, next){
@@ -62,7 +66,7 @@ exports.signUp = function(req, res, next){
                 if(err){
                     return next(err)
                 }
-                mail.sendActiveMail(email, "xxx", "xxxx")
+                mail.sendActiveMail(email, utility.md5(email + config.session_secret), "xxxx")
                 logger.info("%s register success", email)
 
                 res.status(201).location(req.path + "/" + user._id)

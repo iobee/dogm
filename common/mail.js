@@ -31,7 +31,7 @@ exports.sendActiveMail = function(who, token, name){
     var from = util.format("%s <%s>", config.name, config.mail_opts.auth.user)
     var to = who
     var subject = config.name + "DogM Account"
-    var html = "Hello world"
+    var html = "Hello world, please click the " + SITE_ROOT_URL + "/active_account?token=" + token + "&name=" + name;
 
     exports.sendMail({
         from: from,
