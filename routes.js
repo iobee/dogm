@@ -19,7 +19,7 @@ router.get("/login", SignController.login)
 // user interface
 router.get("/users/:id", UserController.getUserInfo)
 router.delete("/users/:id", UserController.deleteUserById)
-router.post("/users", SignController.inviteUser)
+router.post("/users", SignController.signUp)
 router.patch("/users", SignController.signUp)
 router.get("/users", UserController.getUserList)
 router.get("/user", UserController.getCurrentUser)

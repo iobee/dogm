@@ -8,15 +8,10 @@
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('RegisterCtrl', function ($scope, user) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ]
+    .controller('RegisterCtrl', function ($scope, User) {
 
         $scope.register = function(){
-            user.save({
+            User.save({
                 email: $scope.email,
                 password: $scope.password,
                 username: $scope.username
@@ -25,7 +20,7 @@ angular.module('publicApp')
 
                 })
                 .catch(function(err){
-                    $scope.email = err.errorMsg
+                    $scope.email = err.errormsg
                 })
         }
     })

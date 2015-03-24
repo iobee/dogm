@@ -15,7 +15,7 @@ describe("test/controller/user.test.js", function(){
                 .send({
                     username: "nick",
                     realName: "wangdong",
-                    email: "iobee@test.com",
+                    email: "iobee@sina.com",
                     password: "123"
                 })
                 .expect("Location", /users/)
@@ -33,7 +33,7 @@ describe("test/controller/user.test.js", function(){
                 .send({
                     username: "nick",
                     realName: "wangdong",
-                    email: "iobee@test.com",
+                    email: "392599025@qq.com",
                     password: "123"
                 })
                 .expect(400)

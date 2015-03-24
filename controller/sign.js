@@ -97,7 +97,9 @@ exports.inviteUser = function(req, res, next) {
 
     mail.sendActiveMail(email, utility.md5(email + config.session_secret), "Nick")
     logger.info("invite %s success", email)
-    res.json("success")
+    res.json({
+        status: "success"
+    })
 }
 
 exports.login = function(req, res, next) {
