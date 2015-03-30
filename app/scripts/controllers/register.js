@@ -8,19 +8,22 @@
  * Controller of the publicApp
  */
 angular.module('publicApp')
-    .controller('RegisterCtrl', function ($scope, User) {
+    .controller('RegisterCtrl', function ($scope, $routeParams, User) {
+
+        $scope.user = {};
+
+        $scope.user.email = $routeParams.email;
+        $scope.user.token = $routeParams.token;
+        $scope.user._id = $routeParams._id;
 
         $scope.register = function(){
-            User.save({
-                email: $scope.email,
-                password: $scope.password,
-                username: $scope.username
-            }).$promise
+            var user = new User($scope.user)
+            user.$patch()
                 .then(function(user){
 
                 })
                 .catch(function(err){
-                    $scope.email = err.errormsg
+                    $scope.email = err.errormsg;
                 })
         }
     })

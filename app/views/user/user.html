@@ -5,33 +5,24 @@
 			<tr>
 				<th></th>
                 <th>name</th>
-                <th>status</th>
-                <th>desc</th>
+                <th>email</th>
+                <th>role</th>
+                <th>last visited</th>
                 <th>create date</th>
                 <th>action</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-                <td>KernelSec</td>
-                <td>development</td>
-                <td>xxxx</td>
-                <td>2013-2-33 xx</td>
-                <td>
-                    <button class="btn btn-danger btn-sm" ng-click="deleteProject(project)">delete</button>
-                    <button class="btn btn-primary btn-sm" ng-click="disable(project)">edit</button>
-                </td>
-			</tr>
             <tr ng-repeat="user in users">
                 <td>{{$index + 1}}</td>
-                <td>{{project.name}}</td>
-                <td>{{project.status}}</td>
-                <td>{{project.desc}}</td>
-                <td>{{project.createdDate}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.roleId}}</td>
+                <td>{{user.lastVisited | date: 'yyyy-MM-dd hh:mm:ss'}}</td>
+                <td>{{user.dateCreated | date: 'yyyy-MM-dd hh:mm:ss'}}</td>
                 <td>
-                    <button class="btn btn-danger btn-sm" ng-click="deleteProject(project)">delete</button>
-                    <button class="btn btn-primary btn-sm" ng-click="disable(project)">edit</button>
+                    <button class="btn btn-danger btn-sm" ng-click="deleteUser(user)">delete</button>
+                    <button class="btn btn-primary btn-sm" ng-click="">edit</button>
                 </td>
             </tr>
 		</tbody>

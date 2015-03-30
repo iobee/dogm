@@ -12,23 +12,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-                <td>KernelSec</td>
-                <td>development</td>
-                <td>xxxx</td>
-                <td>2013-2-33 xx</td>
-                <td>
-                    <button class="btn btn-danger btn-sm" ng-click="deleteProject(project)">delete</button>
-                    <button class="btn btn-primary btn-sm" ng-click="disable(project)">edit</button>
-                </td>
-			</tr>
             <tr ng-repeat="project in projects">
                 <td>{{$index + 1}}</td>
                 <td>{{project.name}}</td>
-                <td>{{project.status}}</td>
+                <td>{{(status | filter: {code: project.status})[0].name}}</td>
                 <td>{{project.desc}}</td>
-                <td>{{project.createdDate}}</td>
+                <td>{{project.createdDate | date: 'yyyy-MM-dd hh:mm:ss'}}</td>
                 <td>
                     <button class="btn btn-danger btn-sm" ng-click="deleteProject(project)">delete</button>
                     <button class="btn btn-primary btn-sm" ng-click="disable(project)">edit</button>
@@ -55,12 +44,12 @@
                 <label for="inputStatus">Status</label>
                 <div class="row">
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        <select ng-model="project.status" id="inputStatus" class="form-control" required>
+                        <select ng-model="project.status" id="inputStatus" class="form-control" ng-options="item.code as item.name for item in status" required>
                             <option value="">-- Select --</option>
-                            <option value="0">Development</option>
-                            <option value="1">Release</option>
-                            <option value="2">Stable</option>
-                            <option value="3">Obsolete</option>
+                            <!--<option value="0">Development</option>-->
+                            <!--<option value="1">Release</option>-->
+                            <!--<option value="2">Stable</option>-->
+                            <!--<option value="3">Obsolete</option>-->
                         </select>
                     </div>
                 </div>

@@ -9,20 +9,18 @@
  */
 angular.module('publicApp')
     .controller('LoginCtrl', function ($scope, $location, login) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ]
 
         $scope.submit = function () {
             login.get({email: $scope.email, password: $scope.password}).$promise
                 .then(function(user){
-                    $scope.email = user;
+                    //$scope.email = user;
                     $location.path('/');
                 })
                 .catch(function(err){
-                    $scope.email = 'error'
-                })
+                    $scope.validator = {};
+                    $scope.validator.email = "has-error";
+                    $scope.validator.password = "has-error";
+                    $scope.validator.helpText = "用户名或密码错误，请重新输入";
+                });
         }
     })

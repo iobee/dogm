@@ -1,6 +1,43 @@
 "use strict"
 var UserProxy = require("../proxy").User
 var logger = require("../common/logger")
+var tools = require("../common/tools")
+
+var EventProxy = require("eventproxy")
+
+exports.updateUser = function(req, res, next) {
+    var userId = req.params.id
+    var username = req.body.username
+    var password = req.body.password
+
+    var ep = new EventProxy()
+    ep.fail(next)
+    ep.on("prop_err", function(msg){
+        res.status(400)
+        res.json(msg)
+    })
+
+    tools.bhash(password, function(err, passhash) {
+        var user = {
+            username: username,
+            password: passhash,
+            active: true
+        }
+
+        UserProxy.updateUser(userId, user, function(err, numAffected) {
+            if (err) {
+                return next(err)
+            }
+
+            if (numAffected === 0) {
+                res.status(404).end()
+            }
+
+            res.status(200).end()
+
+        })
+    })
+}
 
 exports.getUserInfo = function(req, res, next){
     var userId = req.params.id

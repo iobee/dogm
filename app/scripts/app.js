@@ -15,7 +15,8 @@ angular
         'ngResource',
         'ngRoute',
         'ngSanitize',
-        'ngTouch'
+        'ngTouch',
+        'angularFileUpload'
     ])
     .config(function ($routeProvider) {
         $routeProvider
@@ -35,6 +36,10 @@ angular
                 resolve: {
                     logout: 'Logout'
                 }
+            })
+            .when('/activeAccount', {
+                templateUrl: 'views/register.html',
+                controller: 'RegisterCtrl'
             })
             .when('/register', {
                 templateUrl: 'views/register.html',

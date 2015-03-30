@@ -13,10 +13,11 @@ var utility = require("utility")
 var SITE_ROOT_URL = config.hostname;
 
 
-exports.signUp = function(req, res, next){
+exports.editUser = function(req, res, next){
     var username = req.body.username
 	var email = req.body.email
 	var pass = req.body.password
+    var token = req.body.token
 
     var ep = new EventProxy()
     ep.fail(next)
@@ -59,17 +60,17 @@ exports.signUp = function(req, res, next){
             var user = {
                 email: email,
                 password: passhash,
-                username: username
+                username: username,
+                active: true
             }
 
             UserProxy.saveUser(user, function(err, user){
                 if(err){
                     return next(err)
                 }
-                mail.sendActiveMail(email, utility.md5(email + config.session_secret), "xxxx")
                 logger.info("%s register success", email)
 
-                res.status(201).location(req.path + "/" + user._id)
+                res.status(200)
                 res.json(user)
             })
         })

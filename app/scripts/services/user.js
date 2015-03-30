@@ -9,5 +9,11 @@
  */
 angular.module('publicApp')
     .factory('User', function ($resource) {
-        return $resource('/api/v1/users', {})
+        return $resource('/api/v1/users/:id', {id: "@_id"},
+            {
+                patch: {
+                    method: "PATCH"
+                }
+            }
+        )
     });

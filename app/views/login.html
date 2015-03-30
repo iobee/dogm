@@ -27,42 +27,36 @@
                 <span class="glyphicon glyphicon-lock"></span> Login
             </div>
             <div class="panel-body">
-                <form method="post" class="form-horizontal" role="form" ng-submit="submit()">
-                    <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-3 control-label">
+                <form method="post" role="form" ng-submit="submit()">
+                    <div class="form-group" ng-class="validator.email">
+                        <label for="inputEmail3" class="sr-only">
                             Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="email" required>
-                        </div>
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="email" required>
                     </div>
-                    <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-3 control-label">
+                    <div class="form-group" ng-class="validator.password">
+                        <label for="inputPassword3" class="sr-only">
                             Password</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="password" required>
-                        </div>
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="password" required>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"/>
-                                    Remember me
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<div class="col-sm-offset-3 col-sm-9">-->
+                            <!--<div class="checkbox">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox"/>-->
+                                    <!--Remember me-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="form-group last">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <button type="submit" class="btn btn-success btn-sm">
-                                Sign in</button>
-                        </div>
+                        <span id="helpBlock" class="help-block">{{validator.helpText}}</span>
+                        <button type="submit" class="btn btn-success btn-block"> Sign in</button>
                     </div>
                 </form>
             </div>
-            <div class="panel-footer">
-                Not Registred? <a href="http://www.jquery2dotnet.com">Register here</a>
-            </div>
+            <!--<div class="panel-footer">-->
+                <!--Not Registred? <a href="http://www.jquery2dotnet.com">Register here</a>-->
+            <!--</div>-->
         </div>
     </div>
 </div>

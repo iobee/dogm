@@ -10,6 +10,7 @@ var BugSchema = new Schema({
     _reporter: {type: ObjectId, ref: "User"},
     _handler: {type: ObjectId, ref: "User"},
     _project: {type: ObjectId, ref: "Project"},
+    _file: {type: ObjectId, ref: "File"},
     createdDate: {type: Date, default: Date.now}
 })
 

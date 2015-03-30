@@ -9,6 +9,13 @@
  */
 angular.module('publicApp')
     .controller('ProjectCtrl', function ($scope, Project) {
+        $scope.status= [
+            {name: "Development", code: 0},
+            {name: "Release", code: 1},
+            {name: "Stable", code: 2},
+            {name: "Obsolete", code: 3}
+        ];
+
         $scope.projects = Project.query();
 
         $scope.deleteProject = function(project) {

@@ -19,8 +19,8 @@ router.get("/login", SignController.login)
 // user interface
 router.get("/users/:id", UserController.getUserInfo)
 router.delete("/users/:id", UserController.deleteUserById)
-router.post("/users", SignController.signUp)
-router.patch("/users", SignController.signUp)
+router.post("/users", SignController.inviteUser) // invite a user
+router.patch("/users/:id", UserController.updateUser) // 完善用户信息
 router.get("/users", UserController.getUserList)
 router.get("/user", UserController.getCurrentUser)
 // router.get("/projects/:id/users", UserController.getUserByProject)

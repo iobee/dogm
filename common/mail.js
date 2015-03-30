@@ -25,7 +25,7 @@ exports.sendMail = sendMail
  * @param {String} token token for reset
  * @param {String} name Recipients username
  */
-exports.sendActiveMail = function(who, token, name, callback){
+exports.sendActiveMail = function(who, token, name, callback) {
     var from = util.format('%s <%s>', config.name, config.mail_opts.auth.user)
     var to = who
     var subject = config.name + '社区密码重置'
